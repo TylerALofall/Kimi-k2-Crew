@@ -1,0 +1,29 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.venv
+.env
+.vscode/
+.idea/
+*.log
+# research_output_stage_*.xml
+mcp_log.csv
+mcp_memory.csv
+output/
+temp_io/
+
+# Exclude large data and PDF files
+ECF_FILES/
+TEMPLATES/
+*.pdf
+*.zip
+*.xlsx
+*.docx
+*.tsv
+*.lnk
