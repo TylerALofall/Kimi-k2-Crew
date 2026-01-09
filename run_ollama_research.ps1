@@ -1,8 +1,10 @@
-
 # Legal Research Automation - PowerShell Version
 # Based on PROMPT.sql logic
 
-$BaseDir = "d:/Kimi-k2-Crew"
+$BaseDir = $PSScriptRoot
+if ($BaseDir.EndsWith("scripts") -or $BaseDir.EndsWith("src")) {
+    $BaseDir = Split-Path $BaseDir -Parent
+}
 $PdfPath = Join-Path $BaseDir "THE_BRIEF_FINAL-12-10-2025.pdf"
 $PromptSqlPath = Join-Path $BaseDir "PROMPT.sql"
 $ModelName = "qwen3:4b"
@@ -30,7 +32,7 @@ $PlanStartTag = "*************************"
 
 $SystemMsgStartIndex = $PromptContent.IndexOf($SystemMsgStartTag) + $SystemMsgStartTag.Length
 $SystemMsgEndIndex = $PromptContent.IndexOf($PromptStartTag)
-$SystemMessage = $PromptContent.Substring($SystemMsgStartIndex, $SystemMsgEndIndex - $SystemMsgStartIndex).Trim("{} `n`r")
+$SystemMessage = $PromptContent.Substring($SystemMsgStartIndex, $SystemMsgEndIndex - $SystemMsgStartIndex).Trim()
 
 $PromptStartIndex = $PromptContent.IndexOf($PromptStartTag) + $PromptStartTag.Length
 $PromptEndIndex = $PromptContent.IndexOf($PlanStartTag)

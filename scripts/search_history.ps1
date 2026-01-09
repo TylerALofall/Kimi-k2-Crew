@@ -4,8 +4,12 @@
 
 param([string]$Query, [string]$Result)
 
-$HistoryFile = Join-Path "d:\Kimi-k2-Crew\logs" "search_history.json"
-if (-not (Test-Path "d:\Kimi-k2-Crew\logs")) { New-Item -ItemType Directory -Path "d:\Kimi-k2-Crew\logs" }
+$BaseDir = $PSScriptRoot
+if ($BaseDir.EndsWith("scripts") -or $BaseDir.EndsWith("src")) {
+    $BaseDir = Split-Path $BaseDir -Parent
+}
+$HistoryFile = Join-Path $BaseDir "logs" "search_history.json"
+if (-not (Test-Path (Join-Path $BaseDir "logs"))) { New-Item -ItemType Directory -Path (Join-Path $BaseDir "logs") }
 
 $Entry = @{
     Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"

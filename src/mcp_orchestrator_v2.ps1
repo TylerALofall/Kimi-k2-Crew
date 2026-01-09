@@ -2,7 +2,11 @@
 # mcp_orchestrator_v2.ps1
 # PowerShell version of the orchestrator logic
 
-Import-Module "d:\Kimi-k2-Crew\src\tools.ps1"
+$BaseDir = $PSScriptRoot
+if ($BaseDir.EndsWith("scripts") -or $BaseDir.EndsWith("src")) {
+    $BaseDir = Split-Path $BaseDir -Parent
+}
+Import-Module (Join-Path $BaseDir "src" "tools.ps1")
 
 Write-Host "--- Legal Research Orchestrator (PowerShell) ---" -ForegroundColor Cyan
 
