@@ -6,12 +6,13 @@ Write-Host "--- Initializing Legal Learning Module ---" -ForegroundColor Cyan
 
 function Update-KnowledgeBase {
     param([string]$FactId, [string]$Findings)
-$BaseDir = $PSScriptRoot
-if ($BaseDir.EndsWith("scripts") -or $BaseDir.EndsWith("src")) {
-    $BaseDir = Split-Path $BaseDir -Parent
-}
-$KnowledgeFile = Join-Path $BaseDir "logs" "knowledge_base.json"
-if (-not (Test-Path (Join-Path $BaseDir "logs"))) { New-Item -ItemType Directory -Path (Join-Path $BaseDir "logs") }
+    
+    $BaseDir = $PSScriptRoot
+    if ($BaseDir.EndsWith("scripts") -or $BaseDir.EndsWith("src")) {
+        $BaseDir = Split-Path $BaseDir -Parent
+    }
+    $KnowledgeFile = Join-Path $BaseDir "logs" "knowledge_base.json"
+    if (-not (Test-Path (Join-Path $BaseDir "logs"))) { New-Item -ItemType Directory -Path (Join-Path $BaseDir "logs") }
     
     $Knowledge = if (Test-Path $KnowledgeFile) { Get-Content $KnowledgeFile | ConvertFrom-Json } else { @{} }
     $Knowledge[$FactId] = $Findings
